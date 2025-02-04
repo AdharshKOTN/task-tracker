@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker</title>
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-10">
+
+    <div class="max-w-lg mx-auto bg-white p-6 rounded shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Task Tracker</h1>
+
+        <form hx-post="/tasks" hx-target="#task-list" hx-swap="beforeend" class="mb-4">
+            <input type="text" name="title" required placeholder="New task..."
+                class="border rounded p-2 w-full">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Add Task</button>
+        </form>
+
+        <ul id="task-list" class="space-y-2">
+            {% for task in tasks %}
+            <li class="flex items-center justify-between p-2 border rounded bg-gray-50">
+                <span hx-post="/tasks/{{ task.id }}/toggle" hx-swap="outerHTML">
+                    {{ task.title }} {% if task.completed %}✅{% endif %}
+                </span>
+                <button hx-delete="/tasks/{{ task.id }}" hx-target="closest li" hx-swap="outerHTML" 
+                    class="bg-red-500 text-white px-2 py-1 rounded">Delete</button>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</body>
+</html>

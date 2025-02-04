@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+    @apply bg-gray-100 p-10;
+}
+
+.container {
+    @apply max-w-lg mx-auto bg-white p-6 rounded shadow-md;
+}
+
+.task {
+    @apply flex items-center justify-between p-2 border rounded bg-gray-50;
+}
+
+button {
+    @apply px-4 py-2 rounded;
+}
+
+.add-task-btn {
+    @apply bg-blue-500 text-white;
+}
+
+.delete-btn {
+    @apply bg-red-500 text-white;
+}
